@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BusCEJO - Acompanhamento em Tempo Real</title>
+
+  <!-- CSS do Mapa (Leaflet) -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+  
+  <!-- Ícones (FontAwesome) -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+
+  <!-- Nosso estilo CSS -->
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- Mapa em Tela Cheia -->
+  <div id="map"></div>
+
+  <!-- Barra Superior Estilo Uber -->
+  <div class="top-bar">
+    <div class="brand">
+      <i class="fa-solid fa-bus"></i>
+      <div>
+        <h2>BusCEJO Escolar</h2>
+        <span>Linha 01 • Valparaíso de Goiás</span>
+      </div>
+    </div>
+    <div class="live-pill">
+      <span class="pulse-dot"></span> AO VIVO
+    </div>
+  </div>
+
+  <!-- Toast de Alerta (Aparece quando o ônibus estiver perto) -->
+  <div id="alert-toast" class="toast hidden">
+    <i class="fa-solid fa-bell fa-bounce"></i>
+    <div>
+      <strong id="toast-title">Ônibus se aproximando!</strong>
+      <p id="toast-desc">O ônibus está a menos de 300 metros da sua parada.</p>
+    </div>
+  </div>
+
+  <!-- Cartão Flutuante Inferior (Estilo Uber/99) -->
+  <div class="uber-card">
+    
+    <!-- Status da Viagem -->
+    <div class="status-header">
+      <div>
+        <span class="status-title" id="status-title">Ônibus a caminho</span>
+        <div class="eta-box">
+          Chega em <span id="eta-minutes">5 min</span> (<span id="distance-meters">850m</span>)
+        </div>
+      </div>
+      <div class="bus-badge">
+        <i class="fa-solid fa-van-shuttle"></i>
+      </div>
+    </div>
+
+    <!-- Barra de Progresso Visual da Rota -->
+    <div class="route-progress">
+      <div class="progress-bar-bg">
+        <div class="progress-bar-fill" id="progress-fill"></div>
+      </div>
+      <div class="progress-labels">
+        <span>Garagem</span>
+        <span class="active-stop">Seu Ponto (Rua 12)</span>
+        <span>CEJO</span>
+      </div>
+    </div>
+
+    <hr class="divider">
+
+    <!-- Informações do Motorista e Veículo -->
+    <div class="driver-info">
+      <div class="driver-profile">
+        <div class="avatar">
+          <i class="fa-solid fa-user-tie"></i>
+        </div>
+        <div>
+          <h4>Sr. Cláudio</h4>
+          <span class="rating"><i class="fa-solid fa-star"></i> 4.9 • Motorista Oficial</span>
+        </div>
+      </div>
+      <div class="vehicle-info">
+        <div class="plate">ABC-1234</div>
+        <span class="model">Ônibus Escolar #01</span>
+      </div>
+    </div>
+
+    <!-- Botões de Ação -->
+    <div class="action-buttons">
+      <button class="btn btn-main" onclick="confirmarPresenca()">
+        <i class="fa-solid fa-person-raising-hand"></i> Estou no Ponto
+      </button>
+      <button class="btn btn-secondary" id="btn-toggle" onclick="alternarSimulacao()">
+        <i class="fa-solid fa-pause"></i> Pausar
+      </button>
+    </div>
+
+  </div>
+
+  <!-- JS do Mapa -->
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  <!-- Nosso Script JS -->
+  <script src="script.js"></script>
+</body>
+</html>
